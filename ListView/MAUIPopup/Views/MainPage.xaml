@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MAUIPopup"
+             x:Class="MAUIPopup.MainPage"
+             xmlns:sfListView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:popup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup">
+
+
+<StackLayout>
+<Button x:Name="clickToShowPopup"
+Text="ClickToShowPopup" Clicked="ClickToShowPopup_Clicked"
+VerticalOptions="Start"
+HorizontalOptions="Center"/>
+<popup:SfPopup x:Name="popup" WidthRequest="350"  HeightRequest="350" ShowFooter="True" AcceptCommand="{Binding PopupAcceptCommand}"  ShowHeader="False">
+<popup:SfPopup.ContentTemplate>
+    <DataTemplate >
+                    <Grid>
+                        <Grid.Behaviors>
+                            <local:GridBehavior/>
+                        </Grid.Behaviors>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Button Text="Find ListView" Grid.Row="0" x:Name="listviewButton"/>
+                        <sfListView:SfListView    x:Name="listView"  ItemSpacing="5"  HeightRequest="110"
+                                                    ItemsSource="{Binding Items}" 
+                                                    SelectionMode="Single" Grid.Row="1">
+                            <sfListView:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="0,10,0,0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="50"/>
+                                            <RowDefinition Height="50"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="ContactName" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+                                        <Entry Text="{Binding ContactName , Mode=TwoWay}" Grid.Row="0" Grid.Column="1"/>
+                                        <Label Text="ContactNumber" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"/>
+                                        <Entry Text="{Binding ContactNumber ,Mode=TwoWay}" Grid.Row="1" Grid.Column="1"/>
+                                    </Grid>
+                                </DataTemplate>
+                </sfListView:SfListView.ItemTemplate>
+                </sfListView:SfListView>
+                </Grid>
+                </DataTemplate>
+</popup:SfPopup.ContentTemplate>
+
+</popup:SfPopup>
+</StackLayout>
+</ContentPage>
